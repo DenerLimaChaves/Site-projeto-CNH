@@ -66,11 +66,16 @@
 <body class="antialiased">
 
     <header class="bg-white shadow-sm">
-        <nav class="container mx-auto px-6 py-4 flex justify-between items-center">
-            <h1 class="text-xl md:text-2xl font-bold text-blue-600">Automação Inteligente</h1>
-            <a href="#contato" class="bg-blue-600 text-white font-medium py-2 px-4 rounded-lg hover:bg-blue-700 transition-colors">
-                Receber Feedback
-            </a>
+        <nav class="container mx-auto px-6 py-4 flex flex-wrap justify-between items-center">
+            <h1 class="text-xl md:text-2xl font-bold text-blue-600 mb-2 md:mb-0">Automação Inteligente</h1>
+            <div class="flex space-x-2">
+                <a href="detalhes_ferramenta.html" class="bg-green-500 text-white font-medium py-2 px-4 rounded-lg hover:bg-green-600 transition-colors">
+                    Detalhes da Ferramenta
+                </a>
+                <a href="#contato" class="bg-blue-600 text-white font-medium py-2 px-4 rounded-lg hover:bg-blue-700 transition-colors">
+                    Receber Feedback
+                </a>
+            </div>
         </nav>
     </header>
 
@@ -169,10 +174,12 @@
                     <p class="mt-2 text-slate-600">O sistema retorna o assinatura recortada do documento, pronto para a próxima etapa.</p>
                 </div>
             </div>
+            
+            <div class="text-center mt-8"> <a href="diagramas.html" target="_blank" class="inline-block bg-indigo-600 text-white font-bold py-3 px-6 rounded-lg hover:bg-indigo-700 transition-colors">
+                    Ver Diagramas BPMN
+                </a>
+            </div>
 
-            <a href="diagramas.html" target="_blank" class="block bg-blue-600 text-white font-bold py-2 px-4 rounded-lg hover:bg-blue-700 transition-colors mx-auto mt-8">
-                Ver Diagramas BPMN
-            </a>
 
             <div class="mt-12 text-center">
                 <h3 class="text-3xl font-bold">Demonstração em Vídeo</h3>
@@ -264,9 +271,9 @@
             });
 
             // Cálculos para a amostra maior
-            const processesPerYear = 700; // Updated to 700 processes per year
-            const manualTimePerDocSeconds = 180; // 3 minutes = 180 seconds
-            const automationTimePerDocSeconds = 12; // 12 seconds
+            const processesPerYear = 700; 
+            const manualTimePerDocSeconds = 180; // 3 minutos = 180 segundos
+            const automationTimePerDocSeconds = 12; // 12 segundos
 
             const manualTotalTimeSeconds = processesPerYear * manualTimePerDocSeconds;
             const automationTotalTimeSeconds = processesPerYear * automationTimePerDocSeconds;
