@@ -45,6 +45,22 @@
         .section-delay-2 { animation-delay: 0.4s; }
         .section-delay-3 { animation-delay: 0.6s; }
         .section-delay-4 { animation-delay: 0.8s; }
+        .video-container {
+            position: relative;
+            width: 100%;
+            padding-bottom: 56.25%; /* 16:9 Aspect Ratio */
+            height: 0;
+            overflow: hidden;
+            border-radius: 0.75rem; /* rounded-xl */
+            box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06); /* shadow-lg */
+        }
+        .video-container video {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+        }
     </style>
 </head>
 <body class="antialiased">
@@ -73,20 +89,20 @@
             <div class="text-center">
                 <h3 class="text-3xl font-bold">O Custo Oculto do Processo Manual</h3>
                 <p class="mt-3 max-w-2xl mx-auto text-slate-600">
-                    A validação manual de documentos consome um tempo valioso. Comparamos o processo tradicional com a nossa automação para mostrar o impacto real na produtividade do seu time.
+                    Uma chamada para ser atendida demora em média de 10 a 14 minutos. A validação da CNH faz parte desse processo, e a etapa manual consome um tempo valioso. Comparamos o processo tradicional com a nossa automação para mostrar o impacto real na produtividade do seu time.
                 </p>
             </div>
 
             <div class="mt-12 grid md:grid-cols-2 gap-8 md:gap-12 items-center">
                 <div class="bg-white p-8 rounded-xl shadow-lg border border-slate-200 text-center">
                     <div class="text-5xl mb-4">👤</div>
-                    <h4 class="text-2xl font-bold text-slate-800">Processo Manual</h4>
-                    <p class="text-5xl font-bold text-red-500 mt-4">1m 36s</p>
-                    <p class="text-slate-500 mt-2">por documento</p>
+                    <h4 class="text-2xl font-bold text-slate-800">Validação Manual de CNH</h4>
+                    <p class="text-5xl font-bold text-red-500 mt-4">3 minutos</p>
+                    <p class="text-slate-500 mt-2">em média por documento</p>
                 </div>
                 <div class="bg-white p-8 rounded-xl shadow-lg border border-slate-200 text-center">
                     <div class="text-5xl mb-4">⚙️</div>
-                    <h4 class="text-2xl font-bold text-slate-800">Nossa Automação com IA</h4>
+                    <h4 class="text-2xl font-bold text-slate-800">Validação com Automação IA</h4>
                     <p class="text-5xl font-bold text-green-500 mt-4">12 segundos</p>
                     <p class="text-slate-500 mt-2">por documento</p>
                 </div>
@@ -104,6 +120,28 @@
                 <div class="chart-container">
                     <canvas id="impactChart"></canvas>
                 </div>
+            </div>
+
+            <div class="mt-16 text-center">
+                <h3 class="text-3xl font-bold">Economia Anual em Grande Escala</h3>
+                <p class="mt-3 max-w-2xl mx-auto text-slate-600">
+                    Considerando uma média de 700 processos de validação de CNH por ano, a automação gera uma economia substancial de tempo para sua equipe.
+                </p>
+                <div class="mt-8 grid md:grid-cols-2 gap-8 md:gap-12 items-center">
+                    <div class="bg-white p-8 rounded-xl shadow-lg border border-slate-200 text-center">
+                        <h4 class="text-2xl font-bold text-slate-800">Tempo Total Manual Anual</h4>
+                        <p id="manualTotalTime" class="text-4xl font-bold text-red-500 mt-4">Calculando...</p>
+                        <p class="text-slate-500 mt-2">para 700 processos</p>
+                    </div>
+                    <div class="bg-white p-8 rounded-xl shadow-lg border border-slate-200 text-center">
+                        <h4 class="text-2xl font-bold text-slate-800">Tempo Total Automatizado Anual</h4>
+                        <p id="automationTotalTime" class="text-4xl font-bold text-green-500 mt-4">Calculando...</p>
+                        <p class="text-slate-500 mt-2">para 700 processos</p>
+                    </div>
+                </div>
+                <p class="mt-8 text-xl font-semibold text-slate-700">
+                    Com a automação, sua empresa economiza <span id="totalTimeSaved" class="text-blue-600 font-bold">Calculando...</span> anualmente!
+                </p>
             </div>
         </section>
 
@@ -132,9 +170,22 @@
                 </div>
             </div>
 
-            <a href="diagramas.html" target="_blank" class="block bg-blue-600 text-white font-bold py-2 px-4 rounded-lg hover:bg-blue-700 transition-colors mx-auto mt-8">
+            <a href="bpmn_diagrams.html" target="_blank" class="block bg-blue-600 text-white font-bold py-2 px-4 rounded-lg hover:bg-blue-700 transition-colors mx-auto mt-8">
                 Ver Diagramas BPMN
             </a>
+
+            <div class="mt-12 text-center">
+                <h3 class="text-3xl font-bold">Demonstração em Vídeo</h3>
+                <p class="mt-3 max-w-2xl mx-auto text-slate-600">
+                    Assista ao vídeo para ver nossa solução em ação e entender como ela simplifica o processo de validação.
+                </p>
+                <div class="mt-8 mx-auto max-w-2xl video-container">
+                    <video controls class="w-full h-full rounded-xl">
+                        <source src="https://www.w3schools.com/html/mov_bbb.mp4" type="video/mp4">
+                        Seu navegador não suporta a tag de vídeo.
+                    </video>
+                </div>
+            </div>
         </section>
 
         <section id="contato" class="mt-20 md:mt-28 text-center bg-white p-10 rounded-xl shadow-lg border border-slate-200 section-fade-in section-delay-4">
@@ -163,10 +214,10 @@
             const impactChart = new Chart(ctx, {
                 type: 'bar',
                 data: {
-                    labels: ['Processo Manual', 'Nossa Automação'],
+                    labels: ['Validação Manual', 'Validação Automatizada'],
                     datasets: [{
                         label: 'Tempo de Análise (em segundos)',
-                        data: [96, 12],
+                        data: [180, 12], // Updated data: 3 minutes = 180 seconds
                         backgroundColor: [
                             'rgba(239, 68, 68, 0.7)',
                             'rgba(34, 197, 94, 0.7)'
@@ -211,6 +262,32 @@
                     }
                 }
             });
+
+            // Cálculos para a amostra maior
+            const processesPerYear = 700; // Updated to 700 processes per year
+            const manualTimePerDocSeconds = 180; // 3 minutes = 180 seconds
+            const automationTimePerDocSeconds = 12; // 12 seconds
+
+            const manualTotalTimeSeconds = processesPerYear * manualTimePerDocSeconds;
+            const automationTotalTimeSeconds = processesPerYear * automationTimePerDocSeconds;
+            const totalTimeSavedSeconds = manualTotalTimeSeconds - automationTotalTimeSeconds;
+
+            // Função para formatar segundos em horas, minutos e segundos
+            const formatSecondsToHMS = (totalSeconds) => {
+                const hours = Math.floor(totalSeconds / 3600);
+                const minutes = Math.floor((totalSeconds % 3600) / 60);
+                const seconds = totalSeconds % 60;
+
+                let result = '';
+                if (hours > 0) result += `${hours}h `;
+                if (minutes > 0) result += `${minutes}min `;
+                if (seconds > 0 || (hours === 0 && minutes === 0)) result += `${seconds}s`;
+                return result.trim();
+            };
+
+            document.getElementById('manualTotalTime').textContent = formatSecondsToHMS(manualTotalTimeSeconds);
+            document.getElementById('automationTotalTime').textContent = formatSecondsToHMS(automationTotalTimeSeconds);
+            document.getElementById('totalTimeSaved').textContent = formatSecondsToHMS(totalTimeSavedSeconds);
 
             const sections = document.querySelectorAll('.section-fade-in');
             const observer = new IntersectionObserver((entries) => {
