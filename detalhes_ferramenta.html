@@ -1,0 +1,183 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Detalhes da Ferramenta: Automação de Assinaturas em CNHs</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;700&display=swap" rel="stylesheet">
+    <style>
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: #f3f4f6; /* Light gray background */
+            color: #1f2937; /* Dark gray text */
+            scroll-behavior: smooth;
+        }
+        .section-fade-in {
+            opacity: 0;
+            transform: translateY(20px);
+            animation: fadeIn 0.8s forwards;
+        }
+        @keyframes fadeIn {
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+        .section-delay-1 { animation-delay: 0.2s; }
+        .section-delay-2 { animation-delay: 0.4s; }
+        .section-delay-3 { animation-delay: 0.6s; }
+        .tech-card {
+            background-color: #ffffff;
+            border-radius: 0.75rem; /* 12px */
+            padding: 1.5rem; /* 24px */
+            box-shadow: 0 4px 6px -1px rgb(0 0 0 / 0.1), 0 2px 4px -2px rgb(0 0 0 / 0.1);
+            border: 1px solid #e5e7eb; /* Lighter border */
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+        .tech-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 15px -3px rgb(0 0 0 / 0.1), 0 4px 6px -2px rgb(0 0 0 / 0.1);
+        }
+        .step-indicator {
+            background-color: #3b82f6; /* Blue-500 */
+            color: white;
+            border-radius: 50%;
+            width: 2.5rem; /* 40px */
+            height: 2.5rem; /* 40px */
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: bold;
+            font-size: 1.125rem; /* 18px */
+            margin-bottom: 0.75rem; /* 12px */
+        }
+    </style>
+</head>
+<body class="antialiased">
+
+    <header class="bg-white shadow-md">
+        <nav class="container mx-auto px-6 py-4 flex justify-between items-center">
+            <h1 class="text-xl md:text-2xl font-bold text-blue-600">
+                Análise Técnica: Automação de Assinaturas
+            </h1>
+            <a href="home.html" class="bg-blue-600 text-white font-medium py-2 px-4 rounded-lg hover:bg-blue-700 transition-colors">
+                Página Inicial
+            </a>
+        </nav>
+    </header>
+
+    <main class="container mx-auto px-6 py-12 md:py-16">
+        
+        <section id="overview" class="mb-16 md:mb-20 section-fade-in">
+            <div class="bg-white p-8 rounded-xl shadow-lg border border-slate-200">
+                <h2 class="text-3xl md:text-4xl font-bold tracking-tight leading-tight text-center mb-6">
+                    O que é a Ferramenta?
+                </h2>
+                <p class="text-lg text-slate-700 leading-relaxed max-w-3xl mx-auto text-center">
+                    Nossa aplicação foi desenvolvida com o objetivo de simplificar e agilizar o processo de identificação e extração de assinaturas em Carteiras Nacionais de Habilitação (CNHs). Através da inteligência artificial, especialmente com o uso da rede neural YOLOv10, transformamos uma tarefa tradicionalmente manual e propensa a erros em um procedimento rápido, eficiente e preciso.
+                </p>
+            </div>
+        </section>
+
+        <section id="how-it-works" class="mb-16 md:mb-20 section-fade-in section-delay-1">
+            <h2 class="text-3xl font-bold text-center mb-10 md:mb-12">Como Funciona o Processo</h2>
+            <div class="space-y-8">
+                <div class="flex flex-col md:flex-row items-start tech-card p-6">
+                    <div class="step-indicator mx-auto md:mx-0 md:mr-6">1</div>
+                    <div>
+                        <h3 class="text-xl font-semibold text-blue-700 mb-2">Entrada e Conversão do Documento</h3>
+                        <p class="text-slate-600">
+                            O processo inicia com o fornecimento do documento CNH, tipicamente em formato PDF. A biblioteca <code class="bg-slate-200 px-1 rounded text-sm font-mono">pdf2image</code> é então utilizada para converter este PDF em um formato de imagem processável, preparando o terreno para a análise.
+                        </p>
+                    </div>
+                </div>
+                <div class="flex flex-col md:flex-row items-start tech-card p-6">
+                    <div class="step-indicator mx-auto md:mx-0 md:mr-6">2</div>
+                    <div>
+                        <h3 class="text-xl font-semibold text-blue-700 mb-2">Detecção da Assinatura com IA</h3>
+                        <p class="text-slate-600">
+                            A imagem da CNH é analisada pela rede neural <code class="bg-slate-200 px-1 rounded text-sm font-mono">YOLOv10</code>. Este modelo, acessado através do framework <code class="bg-slate-200 px-1 rounded text-sm font-mono">Ultralytics</code>, é especializado na detecção de objetos e foi treinado para localizar com precisão a região da assinatura no documento.
+                        </p>
+                    </div>
+                </div>
+                <div class="flex flex-col md:flex-row items-start tech-card p-6">
+                     <div class="step-indicator mx-auto md:mx-0 md:mr-6">3</div>
+                    <div>
+                        <h3 class="text-xl font-semibold text-blue-700 mb-2">Recorte e Processamento da Imagem</h3>
+                        <p class="text-slate-600">
+                            Uma vez que a assinatura é detectada, a biblioteca <code class="bg-slate-200 px-1 rounded text-sm font-mono">OpenCV (cv2)</code> entra em ação. Ela é responsável por realizar o recorte preciso da área da assinatura e pode aplicar tratamentos de imagem adicionais para otimizar a qualidade da extração, garantindo clareza.
+                        </p>
+                    </div>
+                </div>
+                <div class="flex flex-col md:flex-row items-start tech-card p-6">
+                    <div class="step-indicator mx-auto md:mx-0 md:mr-6">4</div>
+                    <div>
+                        <h3 class="text-xl font-semibold text-blue-700 mb-2">Resultado Final</h3>
+                        <p class="text-slate-600">
+                            Ao final do processo, a imagem da assinatura recortada e processada é disponibilizada como saída, pronta para ser utilizada em verificações, arquivamento ou outros fins necessários.
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section id="technologies" class="section-fade-in section-delay-2">
+            <h2 class="text-3xl font-bold text-center mb-10 md:mb-12">Tecnologias Utilizadas</h2>
+            <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
+                <div class="tech-card">
+                    <h3 class="text-xl font-semibold text-blue-700 mb-2">Python</h3>
+                    <p class="text-slate-600">
+                        A linguagem de programação principal, escolhida por sua sintaxe clara, vasta gama de bibliotecas para inteligência artificial, processamento de imagens e desenvolvimento ágil.
+                    </p>
+                </div>
+                <div class="tech-card">
+                    <h3 class="text-xl font-semibold text-blue-700 mb-2">YOLOv10 (via Ultralytics)</h3>
+                    <p class="text-slate-600">
+                        Utilizamos a "You Only Look Once" versão 10, uma rede neural de última geração para detecção de objetos em tempo real. O framework Ultralytics simplifica sua implementação para identificar assinaturas com alta precisão.
+                    </p>
+                </div>
+                <div class="tech-card">
+                    <h3 class="text-xl font-semibold text-blue-700 mb-2">pdf2image</h3>
+                    <p class="text-slate-600">
+                        Uma biblioteca crucial para converter arquivos PDF, formato comum de CNHs digitalizadas, em imagens que podem ser efetivamente processadas pelos nossos algoritmos de visão computacional.
+                    </p>
+                </div>
+                <div class="tech-card md:col-span-2 lg:col-span-1 lg:col-start-2">
+                     <h3 class="text-xl font-semibold text-blue-700 mb-2">OpenCV (cv2)</h3>
+                    <p class="text-slate-600">
+                        Biblioteca robusta e fundamental para tarefas de visão computacional. É empregada para a manipulação das imagens, realização de filtros e, mais importante, o recorte preciso da assinatura após sua detecção.
+                    </p>
+                </div>
+            </div>
+        </section>
+    </main>
+    
+    <footer class="bg-slate-800 text-slate-400 mt-16 md:mt-20">
+        <div class="container mx-auto px-6 py-6 text-center">
+            <p>&copy; 2025 Projeto Uninove - Detalhes Técnicos da Ferramenta. Todos os direitos reservados.</p>
+        </div>
+    </footer>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            const sections = document.querySelectorAll('.section-fade-in');
+            const observer = new IntersectionObserver((entries) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        entry.target.style.animationPlayState = 'running';
+                        observer.unobserve(entry.target);
+                    }
+                });
+            }, { threshold: 0.1 });
+
+            sections.forEach(section => {
+                section.style.animationPlayState = 'paused'; // Iniciar pausado
+                observer.observe(section);
+            });
+        });
+    </script>
+</body>
+</html>
